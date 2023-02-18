@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 course5i-mlops
 ==============================
 
@@ -55,3 +56,6 @@ Project Organization
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+=======
+# penguin
+>>>>>>> 1c3e3b1be9d48924caabe89349e423227945920f
