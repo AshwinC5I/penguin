@@ -1,0 +1,50 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/load_data.py --config=params.yaml
+    deps:
+    - path: source_code/penguin_course5i.csv
+      md5: f0ca417f9ece5b06bfcfe6bcb1d98222
+      size: 12982
+    - path: src/get_data.py
+      md5: bdd7dbac482d423168c61ee94186c120
+      size: 684
+    - path: src/load_data.py
+      md5: ee8ab3955d2b82642a5b7cadbe24d3bf
+      size: 686
+    outs:
+    - path: data/raw/penguin_course5i.csv
+      md5: 57e37596734217d07fbf1d736851fdeb
+      size: 12982
+  split_data:
+    cmd: python src/split_data.py --config=params.yaml
+    deps:
+    - path: data/raw/penguin_course5i.csv
+      md5: 57e37596734217d07fbf1d736851fdeb
+      size: 12982
+    - path: src/split_data.py
+      md5: f7dab36688c81c823463dd9f8f22e1ca
+      size: 1131
+    outs:
+    - path: data/processed/test_penguin_course5i.csv
+      md5: a6f5942f2a3a699bb8f10cdb409ac148
+      size: 2686
+    - path: data/processed/train_penguin_course5i.csv
+      md5: 8d8cf10c0e3f92c46601081fa041b2bf
+      size: 10391
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data/processed/test_penguin_course5i.csv
+      md5: a6f5942f2a3a699bb8f10cdb409ac148
+      size: 2686
+    - path: data/processed/train_penguin_course5i.csv
+      md5: 8d8cf10c0e3f92c46601081fa041b2bf
+      size: 10391
+    - path: src/train_and_evaluate.py
+      md5: ab4fd1bfee1b2f698c21c07a586130d2
+      size: 2418
+    params:
+      params.yaml:
+        estimators.ElasticNet.params.alpha: 0.9
+        estimators.ElasticNet.params.l1_ratio: 0.4
